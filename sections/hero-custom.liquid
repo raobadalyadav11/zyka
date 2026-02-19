@@ -1,0 +1,274 @@
+{% comment %}
+  Custom Hero Section
+  - Full width or fixed width
+  - Custom height control
+  - Desktop & Mobile images
+  - Rich text content
+  - Two buttons
+{% endcomment %}
+
+{{ 'section-hero-custom.css' | asset_url | stylesheet_tag }}
+
+<style>
+  #shopify-section-{{ section.id }} .hero-custom {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+</style>
+
+<div class="hero-custom relative overflow-hidden flex items-center justify-center {{ section.settings.height_mobile }} {{ section.settings.height_desktop }}">
+  {% comment %} Background Image {% endcomment %}
+  <div class="hero-custom__bg absolute inset-0 z-0 w-full h-full">
+    {% if section.settings.image_desktop != blank %}
+      {% render 'image',
+        image: section.settings.image_desktop,
+        class: 'w-full h-full object-cover hidden md:block',
+        sizes: '100vw',
+        loading: 'eager',
+        fetchpriority: 'high'
+      %}
+    {% endif %}
+    {% if section.settings.image_mobile != blank %}
+      {% render 'image',
+        image: section.settings.image_mobile,
+        class: 'w-full h-full object-cover block md:hidden',
+        sizes: '100vw',
+        loading: 'eager',
+        fetchpriority: 'high'
+      %}
+    {% elsif section.settings.image_desktop != blank %}
+      {% render 'image',
+        image: section.settings.image_desktop,
+        class: 'w-full h-full object-cover block md:hidden',
+        sizes: '100vw',
+        loading: 'eager',
+        fetchpriority: 'high'
+      %}
+    {% else %}
+      {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg w-full h-full object-cover' }}
+    {% endif %}
+
+    {% comment %} Overlay {% endcomment %}
+    <div class="absolute inset-0 bg-black" style="opacity: {{ section.settings.overlay_opacity }}%;"></div>
+  </div>
+
+  {% comment %} Content {% endcomment %}
+  <div class="hero-custom__content relative z-10 page-width text-{{ section.settings.text_alignment }}">
+    <div class="max-w-xl {% if section.settings.text_alignment == 'center' %}mx-auto{% elsif section.settings.text_alignment == 'right' %}ml-auto{% endif %}">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'heading' %}
+            <h2 class="h1 mb-4 text-{{ block.settings.color }}" {{ block.shopify_attributes }}>
+              {{ block.settings.heading | escape }}
+            </h2>
+
+          {% when 'text' %}
+            <div class="rte mb-8 text-{{ block.settings.color }}" {{ block.shopify_attributes }}>
+              {{ block.settings.text }}
+            </div>
+
+          {% when 'buttons' %}
+            <div
+              class="hero-custom__buttons flex flex-wrap gap-4 {% if section.settings.text_alignment == 'center' %}justify-center{% elsif section.settings.text_alignment == 'right' %}justify-end{% endif %}"
+              {{ block.shopify_attributes }}
+            >
+              {% if block.settings.button_label_1 != blank %}
+                {% render 'button',
+                  label: block.settings.button_label_1,
+                  link: block.settings.button_link_1,
+                  style: 'primary'
+                %}
+              {% endif %}
+              {% if block.settings.button_label_2 != blank %}
+                {% render 'button',
+                  label: block.settings.button_label_2,
+                  link: block.settings.button_link_2,
+                  style: 'secondary'
+                %}
+              {% endif %}
+            </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Hero Custom",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image_desktop",
+      "label": "Image (Desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Image (Mobile)"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "label": "Overlay Opacity",
+      "default": 30
+    },
+    {
+      "type": "select",
+      "id": "height_desktop",
+      "label": "Desktop Height",
+      "options": [
+        { "value": "md:h-[500px]", "label": "Small" },
+        { "value": "md:h-[700px]", "label": "Medium" },
+        { "value": "md:h-screen", "label": "Full Screen" }
+      ],
+      "default": "md:h-[700px]"
+    },
+    {
+      "type": "select",
+      "id": "height_mobile",
+      "label": "Mobile Height",
+      "options": [
+        { "value": "h-[400px]", "label": "Small" },
+        { "value": "h-[500px]", "label": "Medium" },
+        { "value": "h-screen", "label": "Full Screen" }
+      ],
+      "default": "h-[500px]"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Heading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Hero Heading",
+          "label": "Heading"
+        },
+        {
+          "type": "select",
+          "id": "color",
+          "label": "Color",
+          "options": [
+            { "value": "white", "label": "White" },
+            { "value": "black", "label": "Black" }
+          ],
+          "default": "white"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>Give customers details about the banner image(s) or content on the template.</p>",
+          "label": "Description"
+        },
+        {
+          "type": "select",
+          "id": "color",
+          "label": "Color",
+          "options": [
+            { "value": "white", "label": "White" },
+            { "value": "black", "label": "Black" }
+          ],
+          "default": "white"
+        }
+      ]
+    },
+    {
+      "type": "buttons",
+      "name": "Buttons",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_label_1",
+          "default": "Button Label",
+          "label": "Button 1 Label"
+        },
+        {
+          "type": "url",
+          "id": "button_link_1",
+          "label": "Button 1 Link"
+        },
+        {
+          "type": "text",
+          "id": "button_label_2",
+          "default": "Button Label",
+          "label": "Button 2 Label"
+        },
+        {
+          "type": "url",
+          "id": "button_link_2",
+          "label": "Button 2 Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Custom",
+      "blocks": [
+        {
+          "type": "heading"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "buttons"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

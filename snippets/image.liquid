@@ -1,0 +1,45 @@
+{% comment %}
+  Renders an image with responsive srcset.
+
+  Accepts:
+  - image: {Object} Image object
+  - class: {String} Additional classes (optional)
+  - sizes: {String} Sizes attribute (optional, default: '100vw')
+  - loading: {String} 'lazy' or 'eager' (optional, default: 'lazy')
+  - fetchpriority: {String} 'high', 'low', or 'auto' (optional, default: 'auto')
+  - width: {Number} Image width (optional)
+  - height: {Number} Image height (optional)
+
+  Usage:
+  {% render 'image', image: section.settings.image, sizes: '50vw', loading: 'eager', fetchpriority: 'high' %}
+{% endcomment %}
+
+{% liquid
+  assign class = class | default: ''
+  assign sizes = sizes | default: '100vw'
+  assign loading = loading | default: 'lazy'
+  assign fetchpriority = fetchpriority | default: 'auto'
+
+  if width == null
+    assign width = image.width
+  endif
+
+  if height == null
+    assign height = image.height
+  endif
+%}
+
+{% if image != blank %}
+  {{
+    image
+    | image_url: width: width
+    | image_tag:
+      class: class,
+      loading: loading,
+      fetchpriority: fetchpriority,
+      sizes: sizes,
+      widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840'
+  }}
+{% else %}
+  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+{% endif %}

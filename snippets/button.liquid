@@ -1,0 +1,34 @@
+{% comment %}
+  Renders a button.
+
+  Accepts:
+  - label: {String} Button label
+  - link: {String} Button link
+  - style: {String} 'primary' or 'secondary' (optional, default: 'primary')
+  - class: {String} Additional classes (optional)
+  - attributes: {String} Additional attributes (optional)
+
+  Usage:
+  {% render 'button', label: 'Shop Now', link: all_products['product'].url %}
+{% endcomment %}
+
+{% liquid
+  assign style = style | default: 'primary'
+  assign class = class | default: ''
+
+  if style == 'primary'
+    assign button_class = 'button button--primary'
+  else
+    assign button_class = 'button button--secondary'
+  endif
+%}
+
+{% if link != blank %}
+  <a href="{{ link }}" class="{{ button_class }} {{ class }}" {{ attributes }}>
+    {{ label }}
+  </a>
+{% else %}
+  <button class="{{ button_class }} {{ class }}" {{ attributes }}>
+    {{ label }}
+  </button>
+{% endif %}

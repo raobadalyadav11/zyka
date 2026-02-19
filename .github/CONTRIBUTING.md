@@ -11,13 +11,13 @@ We're really glad you're reading this, because we would love to have more develo
 
 ## Before contributing
 
-If you encounter a bug or think of a useful feature for Dawn, please [create a new issue](https://github.com/Shopify/dawn/issues/new). Creating an issue before jumping into code ensures we can discuss it and determine whether it aligns with the direction of the theme.
+If you encounter a bug or think of a useful feature for Zyka, please [create a new issue](https://github.com/Shopify/dawn/issues/new). Creating an issue before jumping into code ensures we can discuss it and determine whether it aligns with the direction of the theme.
 
 If you want to contribute to the theme, regardless of whether it's a small bug fix or correcting a typo, please feel free to do so. Any help goes a long way! Also, contributions aren't necessarily all code related. Other contributions can be in the form of issues, pull requests, discussions, etc.
 
 ## Scope
 
-This Github repository exists for the theme development community to discuss and solve problems directly related to Dawn. It **is not the place** to discuss general theme development problems, nor the place to seek help for non-Dawn related problems.
+This Github repository exists for the theme development community to discuss and solve problems directly related to Zyka. It **is not the place** to discuss general theme development problems, nor the place to seek help for non-Zyka related problems.
 
 Shopify theme development is a big topic and it's completely normal that you will encounter problems which might require you to reach out for help. In fact, we provide several knowledge and support platforms for theme development already:
 
@@ -28,7 +28,7 @@ Shopify theme development is a big topic and it's completely normal that you wil
 
 ## Theme code principles
 
-Before contributing to Dawn, please read the following theme code principles to better understand our fundamental approach to theme development. The expectation is that you follow these principles as you build for Dawn.
+Before contributing to Zyka, please read the following theme code principles to better understand our fundamental approach to theme development. The expectation is that you follow these principles as you build for Zyka.
 
 ### Why these principles?
 
@@ -81,7 +81,7 @@ And since legacy browsers are often the slowest, we don’t burden them with pol
 
 ## Contributing code
 
-You can follow these steps to go from setting up a store to creating a pull request for Dawn.
+You can follow these steps to go from setting up a store to creating a pull request for Zyka.
 
 >:information_source: We'll assume you're already set up with Git and GitHub (if you're not familiar with these, [start with these docs](https://docs.github.com/github/getting-started-with-github/quickstart/set-up-git)).
 
@@ -124,7 +124,7 @@ When creating a new issue, please ensure the issue is clear and include addition
 
 ## Reviewing
 
-We (the Themes team) review every single PR. The purpose of reviews is to create the best version of Dawn we can for merchants, developers, and others who use it.
+We (the Themes team) review every single PR. The purpose of reviews is to create the best version of Zyka we can for merchants, developers, and others who use it.
 
 :yellow_heart: Reviews are always respectful, acknowledging that everyone did the best possible job with the knowledge they had at the time.
 :yellow_heart: Reviews discuss content, not the person who created it.

@@ -1,0 +1,31 @@
+{% comment %}
+  Renders Product USPs from Metafields
+  Accepts:
+  - metafield: {Object} The metafield object (e.g. product.metafields.custom.usps)
+{% endcomment %}
+
+{% if metafield != blank %}
+  <div class="product-usps grid grid-cols-2 gap-4 mt-6 mb-6 p-4 bg-gray-50 rounded-theme border border-gray-100">
+    {% if metafield.type == 'list.single_line_text_field' %}
+      {% for usp in metafield.value %}
+        <div class="usp-item flex items-center gap-2">
+          <div class="text-primary">
+            {% render 'icon', name: 'check', class: 'w-4 h-4' %}
+          </div>
+          <span class="text-sm font-medium">{{ usp }}</span>
+        </div>
+      {% endfor %}
+    {% else %}
+      {% comment %} Fallback for Multi-line text (split by new line) {% endcomment %}
+      {% assign usps = metafield.value | newline_to_br | split: '<br />' %}
+      {% for usp in usps %}
+        <div class="usp-item flex items-center gap-2">
+          <div class="text-primary">
+            {% render 'icon', name: 'check', class: 'w-4 h-4' %}
+          </div>
+          <span class="text-sm font-medium">{{ usp | strip }}</span>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+{% endif %}

@@ -1,8 +1,54 @@
 :root {
+  /* Design System: Colors */
+  --color-primary: #000000;
+  --color-secondary: #ffffff;
+  --color-accent: #333333;
+  --color-background: #ffffff;
+  --color-text: #121212;
+  --color-border: #e0e0e0;
+
+  /* Design System: Typography */
+  --font-heading-family: 'Inter', sans-serif;
+  --font-heading-weight: 700;
+  --font-heading-style: normal;
+  --font-heading-scale: 1.0;
+
+  --font-body-family: 'Inter', sans-serif;
+  --font-body-weight: 400;
+  --font-body-style: normal;
+  --font-body-scale: 1.0;
+
+  /* Design System: Spacing */
+  --page-width: 1200px;
+  --page-width-margin: 2rem;
+  --spacing-sections-desktop: 6rem;
+  --spacing-sections-mobile: 4rem;
+  --grid-desktop-vertical-spacing: 2rem;
+  --grid-desktop-horizontal-spacing: 2rem;
+  --grid-mobile-vertical-spacing: 1.5rem;
+  --grid-mobile-horizontal-spacing: 1.5rem;
+
+  /* Design System: UI Elements */
   --alpha-button-background: 1;
   --alpha-button-border: 1;
   --alpha-link: 0.85;
   --alpha-badge-border: 0.1;
+  
+  --button-radius: 4px;
+  --button-border-width: 1px;
+  --button-shadow-opacity: 0;
+  
+  --inputs-radius: 4px;
+  --inputs-border-width: 1px;
+  --inputs-border-opacity: 0.55;
+  --inputs-shadow-opacity: 0;
+
+  --card-radius: 8px;
+  --card-border-width: 1px;
+  --card-border-opacity: 0.1;
+  --card-shadow-opacity: 0.05;
+
+  /* Focus States */
   --focused-base-outline: 0.2rem solid rgba(var(--color-foreground), 0.5);
   --focused-base-outline-offset: 0.3rem;
   --focused-base-box-shadow: 0 0 0 0.3rem rgb(var(--color-background)), 0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
@@ -1991,6 +2037,7 @@ input[type='checkbox'] {
 
 .quantity__input[type='number'] {
   -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 .quantity__rules {
