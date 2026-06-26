@@ -8,17 +8,9 @@
  * ------------------------------------------------------------
  */
 {
-  "context": {
-    "market": "in"
-  },
-  "parent": "index.json",
-  "sections": {
-    "hero": {
-      "settings": {
-        "image_desktop": "shopify://shop_images/business-pug-working-on-laptop.jpg",
-        "image_mobile": "shopify://shop_images/business-pug-working-on-laptop.jpg"
-      },
-      "blocks": {}
+  "markets": {
+    "in": {
+      "parent": "@default"
     }
   }
 }
